@@ -22,6 +22,15 @@ typedef struct DecoderOut {
     RK_U32 nFlags;
 }DecoderOut_t;
 
+typedef struct ParserOut {
+    RK_U8 *data;
+    RK_U32 size;
+    RK_S64 timeUs;
+    RK_U32 nFlags;
+    RK_U32 width;
+    RK_U32 height;
+}ParserOut_t;
+
 typedef struct EncInputStream {
     RK_U8 *buf;
     RK_S32 size;
@@ -82,6 +91,7 @@ typedef enum OMX_ON2_VIDEO_CODINGTYPE {
     OMX_ON2_VIDEO_CodingFLV1,       /**< Sorenson H.263 */
     OMX_ON2_VIDEO_CodingDIVX3,                   /**< DIVX3 */
     OMX_ON2_VIDEO_CodingVP6,
+    OMX_RK_VIDEO_CodingHEVC,        /**< H.265/HEVC */
     OMX_ON2_VIDEO_CodingKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */
     OMX_ON2_VIDEO_CodingVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
     OMX_ON2_VIDEO_CodingMax = 0x7FFFFFFF
@@ -103,6 +113,7 @@ typedef enum VPU_API_ERR{
     VPU_API_ERR_ON2_CODEC_INIT      =     VPU_API_ERR_BASE -3,
     VPU_API_ERR_STREAM              =     VPU_API_ERR_BASE -4,
     VPU_API_ERR_FATAL_THREAD        =     VPU_API_ERR_BASE -5,
+    VPU_API_EOS_STREAM_REACHED      =     VPU_API_ERR_BASE -11,
 
     VPU_API_ERR_BUTT,
 }VPU_API_ERR;
@@ -125,13 +136,7 @@ typedef struct EncParameter
    int	reserved[3];
 }EncParameter_t;
 
-typedef enum VPU_API_CMD
-{
-   VPU_API_ENC_SETCFG,
-   VPU_API_ENC_GETCFG,
-   VPU_API_ENC_SETFORMAT,
-   VPU_API_ENC_SETIDRFRAME,
-}VPU_API_CMD;
+
 typedef struct EXtraCfg {
     RK_S32 vc1extra_size;
     RK_S32 vp6codeid;

@@ -52,6 +52,8 @@ typedef struct{
 	rat_t DigitalZoomRatio;// inputw/inputw
 	//int FocalLengthIn35mmFilm;
 	int SceneCaptureType;//0
+	char *makernote;
+	int  makernotechars;//length of makernote, include of the end '\0'
 	
 }RkExifInfo;
 

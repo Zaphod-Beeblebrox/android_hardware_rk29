@@ -67,8 +67,7 @@ struct fb_dmabuf_export
 
 #endif
 
-#define NUM_FB_BUFFERS      3
-#define NUM_FB_BUFFERS_TWO  2
+#define NUM_FB_BUFFERS 3
 
 #if GRALLOC_ARM_UMP_MODULE
 #include "ump/include/ump/ump.h"

@@ -31,6 +31,7 @@ typedef enum
     VPU_DEC                 = 0x1,
     VPU_PP                  = 0x2,
     VPU_DEC_PP              = 0x3,
+    VPU_DEC_HEVC            = 0x4,
     VPU_TYPE_BUTT           ,
 
 } VPU_CLIENT_TYPE;
@@ -70,9 +71,8 @@ typedef struct VPUHwEndConfig
     RK_U32 mpeg4Enabled;           /* HW supports MPEG-4 */
     RK_U32 vsEnabled;              /* HW supports video stabilization */
     RK_U32 rgbEnabled;             /* HW supports RGB input */
-    RK_U32 busType;                /* HW bus type in use */
-    RK_U32 busWidth;
-    RK_U32 synthesisLanguage;
+    RK_U32 reg_size;                /* HW bus type in use */
+    RK_U32 reserv[2];
 } VPUHwEncConfig_t;
 
 typedef enum
@@ -100,6 +100,7 @@ RK_S32 VPUClientRelease(int socket);
 RK_S32 VPUClientSendReg(int socket, RK_U32 *regs, RK_U32 nregs);
 RK_S32 VPUClientWaitResult(int socket, RK_U32 *regs, RK_U32 nregs, VPU_CMD_TYPE *cmd, RK_S32 *len);
 RK_S32 VPUClientGetHwCfg(int socket, RK_U32 *cfg, RK_U32 cfg_size);
+RK_S32 VPUClientGetIOMMUStatus();
 
 void *vpu_service(void *);
 
